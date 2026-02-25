@@ -337,3 +337,4 @@ ASALocalRun/
 .nuke
 dist/
 **/Properties/launchSettings.json
+/src/VirtoCommerce.OneShell.Web/Content/one-shell-app

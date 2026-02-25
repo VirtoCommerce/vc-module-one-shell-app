@@ -19,6 +19,14 @@
     <owner>VirtoCommerce</owner>
   </owners>
 
+  <apps>
+    <app id="one-shell-app">
+      <title>One Shell</title>
+      <description>One Shell</description>
+      <supportEmbeddedMode>false</supportEmbeddedMode>
+    </app>
+  </apps>
+
   <projectUrl>https://github.com/VirtoCommerce/vc-module-one-shell</projectUrl>
   <iconUrl>Modules/$(VirtoCommerce.OneShell)/Content/logo.png</iconUrl>
   <requireLicenseAcceptance>false</requireLicenseAcceptance>

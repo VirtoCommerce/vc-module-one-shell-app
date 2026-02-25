@@ -1,0 +1,37 @@
+{
+  "ONE_SHELL_APP": {
+    "MENU": {
+      "TITLE": "One Shell App"
+    },
+    "PAGES": {
+      "LIST": {
+        "TITLE": "One Shell App list",
+        "TOOLBAR": {
+          "REFRESH": "Refresh",
+          "ADD": "Add"
+        },
+        "SEARCH": {
+          "PLACEHOLDER": "Search keywords"
+        },
+        "TABLE": {
+          "TOTALS": "Count:",
+          "HEADER": {}
+        },
+        "EMPTY": {
+          "NO_ITEMS": "No items found",
+          "ADD": "Add items"
+        },
+        "NOT_FOUND": {
+          "EMPTY": "No items found",
+          "RESET": "Reset"
+        }
+      },
+      "DETAILS": {
+        "TITLE": "One Shell App details"
+      },
+      "ALERTS": {
+        "CLOSE_CONFIRMATION": "You have unsaved changes. Close anyway?"
+      }
+    }
+  }
+}

@@ -12,9 +12,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="dist\**" />
+    <Compile Remove="one-shell-app\**" />
     <Content Remove="dist\**" />
+    <Content Remove="one-shell-app\**" />
     <EmbeddedResource Remove="dist\**" />
+    <EmbeddedResource Remove="one-shell-app\**" />
     <None Remove="dist\**" />
+    <None Remove="one-shell-app\**" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VirtoCommerce.OneShell.Core\VirtoCommerce.OneShell.Core.csproj" />

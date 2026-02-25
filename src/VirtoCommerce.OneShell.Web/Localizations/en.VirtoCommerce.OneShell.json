@@ -1,0 +1,24 @@
+{
+  "OneShell": {
+    "blades": {
+      "hello-world": {
+        "title": "Hello world blade"
+      }
+    }
+  },
+  "permissions": {
+    "one-shell:access": "Open OneShell menu",
+    "one-shell:create": "Create OneShell related data",
+    "one-shell:read": "View OneShell related data",
+    "one-shell:update": "Update OneShell related data",
+    "one-shell:delete": "Delete OneShell related data"
+  },
+  "settings": {
+    "OneShell": {
+      "Enabled": {
+        "title": "OneShell Enabled",
+        "description": "OneShell Enabled setting"
+      }
+    }
+  }
+}

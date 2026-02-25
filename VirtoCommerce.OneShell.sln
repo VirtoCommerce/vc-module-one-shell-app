@@ -1,0 +1,85 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BB0E20BC-E348-4107-97CE-568D31D21232}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtoCommerce.OneShell.Web", "src\VirtoCommerce.OneShell.Web\VirtoCommerce.OneShell.Web.csproj", "{D5F96FFB-EE13-4FB3-B6DB-E0DB2F1F598E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtoCommerce.OneShell.Data", "src\VirtoCommerce.OneShell.Data\VirtoCommerce.OneShell.Data.csproj", "{05E92653-DA86-4DFB-A7E3-F670FCC1FF29}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtoCommerce.OneShell.Core", "src\VirtoCommerce.OneShell.Core\VirtoCommerce.OneShell.Core.csproj", "{A6ACC563-C7A6-4B4B-B151-87CE9CC244BD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtoCommerce.OneShell.Data.MySql", "src\VirtoCommerce.OneShell.Data.MySql\VirtoCommerce.OneShell.Data.MySql.csproj", "{26E9747A-C866-470A-AD38-142454D45F16}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtoCommerce.OneShell.Data.PostgreSql", "src\VirtoCommerce.OneShell.Data.PostgreSql\VirtoCommerce.OneShell.Data.PostgreSql.csproj", "{734BF482-DD33-4EB1-BE72-DDB362CBB901}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtoCommerce.OneShell.Data.SqlServer", "src\VirtoCommerce.OneShell.Data.SqlServer\VirtoCommerce.OneShell.Data.SqlServer.csproj", "{FF1FAB1C-0ADC-4E12-BDC8-F5AC49D06D7D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{110D2BF0-A007-498C-8197-15EF79C3AEB5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtoCommerce.OneShell.Tests", "tests\VirtoCommerce.OneShell.Tests\VirtoCommerce.OneShell.Tests.csproj", "{0B1E16DD-D684-4B1A-A428-48AD16CE9E9A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FC303A18-9E50-4C55-9894-6CA5EE542234}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		Directory.Build.props = Directory.Build.props
+		LICENSE = LICENSE
+		module.ignore = module.ignore
+		README.md = README.md
+		VirtoCommerce.OneShell.sln.DotSettings = VirtoCommerce.OneShell.sln.DotSettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D5F96FFB-EE13-4FB3-B6DB-E0DB2F1F598E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5F96FFB-EE13-4FB3-B6DB-E0DB2F1F598E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5F96FFB-EE13-4FB3-B6DB-E0DB2F1F598E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5F96FFB-EE13-4FB3-B6DB-E0DB2F1F598E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05E92653-DA86-4DFB-A7E3-F670FCC1FF29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05E92653-DA86-4DFB-A7E3-F670FCC1FF29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05E92653-DA86-4DFB-A7E3-F670FCC1FF29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05E92653-DA86-4DFB-A7E3-F670FCC1FF29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6ACC563-C7A6-4B4B-B151-87CE9CC244BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6ACC563-C7A6-4B4B-B151-87CE9CC244BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6ACC563-C7A6-4B4B-B151-87CE9CC244BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6ACC563-C7A6-4B4B-B151-87CE9CC244BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26E9747A-C866-470A-AD38-142454D45F16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26E9747A-C866-470A-AD38-142454D45F16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26E9747A-C866-470A-AD38-142454D45F16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26E9747A-C866-470A-AD38-142454D45F16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{734BF482-DD33-4EB1-BE72-DDB362CBB901}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{734BF482-DD33-4EB1-BE72-DDB362CBB901}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{734BF482-DD33-4EB1-BE72-DDB362CBB901}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{734BF482-DD33-4EB1-BE72-DDB362CBB901}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF1FAB1C-0ADC-4E12-BDC8-F5AC49D06D7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF1FAB1C-0ADC-4E12-BDC8-F5AC49D06D7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF1FAB1C-0ADC-4E12-BDC8-F5AC49D06D7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF1FAB1C-0ADC-4E12-BDC8-F5AC49D06D7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B1E16DD-D684-4B1A-A428-48AD16CE9E9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B1E16DD-D684-4B1A-A428-48AD16CE9E9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B1E16DD-D684-4B1A-A428-48AD16CE9E9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B1E16DD-D684-4B1A-A428-48AD16CE9E9A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D5F96FFB-EE13-4FB3-B6DB-E0DB2F1F598E} = {BB0E20BC-E348-4107-97CE-568D31D21232}
+		{05E92653-DA86-4DFB-A7E3-F670FCC1FF29} = {BB0E20BC-E348-4107-97CE-568D31D21232}
+		{A6ACC563-C7A6-4B4B-B151-87CE9CC244BD} = {BB0E20BC-E348-4107-97CE-568D31D21232}
+		{26E9747A-C866-470A-AD38-142454D45F16} = {BB0E20BC-E348-4107-97CE-568D31D21232}
+		{734BF482-DD33-4EB1-BE72-DDB362CBB901} = {BB0E20BC-E348-4107-97CE-568D31D21232}
+		{FF1FAB1C-0ADC-4E12-BDC8-F5AC49D06D7D} = {BB0E20BC-E348-4107-97CE-568D31D21232}
+		{0B1E16DD-D684-4B1A-A428-48AD16CE9E9A} = {110D2BF0-A007-498C-8197-15EF79C3AEB5}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {275BD781-D730-44C7-B257-E7CC759770F7}
+	EndGlobalSection
+EndGlobal

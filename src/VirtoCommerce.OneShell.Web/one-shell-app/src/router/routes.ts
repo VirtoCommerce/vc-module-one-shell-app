@@ -1,6 +1,7 @@
 import { RouteRecordRaw } from "vue-router";
 import App from "../pages/App.vue";
 import Dashboard from "../pages/Dashboard.vue";
+import Platform from "../pages/Platform.vue";
 import { Invite, Login, ResetPassword, useBladeNavigation, ChangePasswordPage } from "@vc-shell/framework";
 // eslint-disable-next-line import/no-unresolved
 import whiteLogoImage from "/assets/logo-white.svg";
@@ -21,6 +22,11 @@ export const routes: RouteRecordRaw[] = [
         path: "",
         alias: `/`,
         component: Dashboard,
+      },
+      {
+        name: "Platform",
+        path: "platform",
+        component: Platform,
       },
     ],
   },

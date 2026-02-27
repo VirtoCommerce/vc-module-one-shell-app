@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -45,7 +46,12 @@ public class Module : IModule, IHasConfiguration
         });
 
         // Register services
+        serviceCollection.AddTransient<IOneShellRepository, OneShellRepository>();
+        serviceCollection.AddSingleton<Func<IOneShellRepository>>(provider => () => provider.CreateScope().ServiceProvider.GetRequiredService<IOneShellRepository>());
+
         serviceCollection.AddTransient<IMainMenuService, MainMenuService>();
+        serviceCollection.AddTransient<IMainMenuEventService, MainMenuEventService>();
+        serviceCollection.AddTransient<IMainMenuEventSearchService, MainMenuEventSearchService>();
     }
 
     public void PostInitialize(IApplicationBuilder appBuilder)

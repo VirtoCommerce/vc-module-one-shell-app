@@ -30,19 +30,19 @@ public static class ModuleConstants
     {
         public static class General
         {
-            public static SettingDescriptor OneShellEnabled { get; } = new()
+            public static SettingDescriptor MainMenu { get; } = new SettingDescriptor
             {
-                Name = "OneShell.Enabled",
-                GroupName = "OneShell|General",
-                ValueType = SettingValueType.Boolean,
-                DefaultValue = false,
+                Name = "OneShell.MainMenu",
+                GroupName = "OneShell|User General",
+                ValueType = SettingValueType.Json,
+                DefaultValue = "{}"
             };
 
             public static IEnumerable<SettingDescriptor> AllGeneralSettings
             {
                 get
                 {
-                    yield return OneShellEnabled;
+                    yield return MainMenu;
                 }
             }
         }

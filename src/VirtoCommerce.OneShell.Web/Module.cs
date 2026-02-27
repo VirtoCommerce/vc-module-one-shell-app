@@ -2,17 +2,19 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using VirtoCommerce.OneShell.Core;
+using VirtoCommerce.OneShell.Core.Services;
+using VirtoCommerce.OneShell.Data.MySql;
+using VirtoCommerce.OneShell.Data.PostgreSql;
+using VirtoCommerce.OneShell.Data.Repositories;
+using VirtoCommerce.OneShell.Data.Services;
+using VirtoCommerce.OneShell.Data.SqlServer;
 using VirtoCommerce.Platform.Core.Modularity;
 using VirtoCommerce.Platform.Core.Security;
 using VirtoCommerce.Platform.Core.Settings;
 using VirtoCommerce.Platform.Data.MySql.Extensions;
 using VirtoCommerce.Platform.Data.PostgreSql.Extensions;
 using VirtoCommerce.Platform.Data.SqlServer.Extensions;
-using VirtoCommerce.OneShell.Core;
-using VirtoCommerce.OneShell.Data.MySql;
-using VirtoCommerce.OneShell.Data.PostgreSql;
-using VirtoCommerce.OneShell.Data.Repositories;
-using VirtoCommerce.OneShell.Data.SqlServer;
 
 namespace VirtoCommerce.OneShell.Web;
 
@@ -42,12 +44,8 @@ public class Module : IModule, IHasConfiguration
             }
         });
 
-        // Override models
-        //AbstractTypeFactory<OriginalModel>.OverrideType<OriginalModel, ExtendedModel>().MapToType<ExtendedEntity>();
-        //AbstractTypeFactory<OriginalEntity>.OverrideType<OriginalEntity, ExtendedEntity>();
-
         // Register services
-        //serviceCollection.AddTransient<IMyService, MyService>();
+        serviceCollection.AddTransient<IMainMenuService, MainMenuService>();
     }
 
     public void PostInitialize(IApplicationBuilder appBuilder)

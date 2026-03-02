@@ -1,7 +1,10 @@
 export interface CustomMenuItem {
   id: string;
   label: string;
-  icon: string;
+  description?: string;
+  icon?: string;
+  iconUrl?: string;
+  type?: string;
   url?: string;
   children?: CustomMenuItem[];
 }

@@ -2,31 +2,16 @@ import { ref, computed } from "vue";
 import { useApiClient, useAsync } from "@vc-shell/framework";
 import { MenuItemClickEvent, OneShellClient } from "../../api_client/virtocommerce.oneshell";
 import type { CustomMenuItem, MenuSection } from "../../shared/main-menu/types";
-
-interface ApiMenuItem {
-  id: string;
-  title: string;
-  icon: string;
-  app?: { url: string };
-  children?: ApiMenuItem[];
-}
-
-interface ApiMenuGroup {
-  id: string;
-  title: string;
-  items: ApiMenuItem[];
-}
-
-interface ApiMenuResponse {
-  title: string;
-  groups: ApiMenuGroup[];
-}
+import type { ApiMenuItem, ApiMenuResponse } from "../../shared/main-menu/types/api";
 
 function mapMenuItem(item: ApiMenuItem): CustomMenuItem {
   return {
     id: item.id,
     label: item.title,
+    description: item.description,
     icon: item.icon,
+    iconUrl: item.iconUrl,
+    type: item.type,
     url: item.app?.url,
     children: item.children?.length ? item.children.map(mapMenuItem) : undefined,
   };

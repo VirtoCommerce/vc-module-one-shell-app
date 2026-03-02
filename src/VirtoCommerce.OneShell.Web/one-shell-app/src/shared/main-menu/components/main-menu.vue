@@ -23,11 +23,6 @@
             <VcSkeleton
               :rows="1"
               animated
-              class="main-menu__skeleton-icon"
-            />
-            <VcSkeleton
-              :rows="1"
-              animated
               class="main-menu__skeleton-label"
             />
           </div>
@@ -173,10 +168,6 @@ function toggleExpanded(id: string, isOpen: boolean) {
 
     &-item {
       @apply tw-flex tw-items-center tw-gap-1.5 tw-p-1.5;
-    }
-
-    &-icon {
-      @apply tw-h-4 tw-w-4 tw-shrink-0;
     }
 
     &-label {

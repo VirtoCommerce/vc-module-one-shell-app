@@ -121,8 +121,11 @@ export class OneShellClient extends AuthApiBase {
     /**
      * @return OK
      */
-    getMainMenu2(take: number): Promise<string> {
-        let url_ = this.baseUrl + "/api/one-shell/recent/{take}";
+    getMainMenu2(cultureName: string, take: number): Promise<string> {
+        let url_ = this.baseUrl + "/api/one-shell/recent/{cultureName}/{take}";
+        if (cultureName === undefined || cultureName === null)
+            throw new globalThis.Error("The parameter 'cultureName' must be defined.");
+        url_ = url_.replace("{cultureName}", encodeURIComponent("" + cultureName));
         if (take === undefined || take === null)
             throw new globalThis.Error("The parameter 'take' must be defined.");
         url_ = url_.replace("{take}", encodeURIComponent("" + take));

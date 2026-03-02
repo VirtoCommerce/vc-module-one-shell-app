@@ -21,7 +21,7 @@
   },
   "apiClientGenerator": {
     "version": "0.0.0",
-    "generatedAt": "2026-03-02T10:28:13.719Z"
+    "generatedAt": "2026-03-02T14:19:18.205Z"
   },
   "module": "./dist/virtocommerce.oneshell.js",
   "types": "./dist/types/virtocommerce.oneshell.d.ts"

@@ -31,13 +31,24 @@ public class OneShellController : Controller
 
     [HttpGet]
     [Route("recent/{cultureName}/{take}")]
-    public async Task<ActionResult<string>> GetMainMenu([FromRoute] string cultureName = null, [FromRoute] int take = 5)
+    public async Task<ActionResult<string>> GetRecent([FromRoute] string cultureName = null, [FromRoute] int take = 5)
     {
         var userId = User.GetUserId();
 
         var result = await _mainMenuService.GetRecentMenuItemsAsync(cultureName, userId, take);
 
         return Ok(result);
+    }
+
+    [HttpPost]
+    [Route("clear-recent")]
+    public async Task<ActionResult> ClearRecent()
+    {
+        var userId = User.GetUserId();
+
+        await _mainMenuService.ClearRecentAsync(userId);
+
+        return NoContent();
     }
 
     [HttpPost]

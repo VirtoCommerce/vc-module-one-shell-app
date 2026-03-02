@@ -96,4 +96,18 @@ public class MainMenuService : IMainMenuService
 
         await _mainMenuEventService.SaveChangesAsync(eventsToSave);
     }
+
+    public async Task ClearRecentAsync(string userId)
+    {
+        var searchCriteria = AbstractTypeFactory<MainMenuEventSearchCriteria>.TryCreateInstance();
+
+        searchCriteria.UserId = userId;
+
+        await foreach (var searchResult in _mainMenuEventSearchService.SearchBatchesNoCloneAsync(searchCriteria))
+        {
+            var ids = searchResult.Results.Select(x => x.Id).ToArray();
+
+            await _mainMenuEventService.DeleteAsync(ids);
+        }
+    }
 }

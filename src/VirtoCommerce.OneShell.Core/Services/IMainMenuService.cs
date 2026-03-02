@@ -11,4 +11,6 @@ public interface IMainMenuService
     Task<IList<MenuItem>> GetRecentMenuItemsAsync(string cultureName, string userId, int take);
 
     Task RecordClickEventAsync(MenuItemClickEvent clickEvent);
+
+    Task ClearRecentAsync(string userId);
 }

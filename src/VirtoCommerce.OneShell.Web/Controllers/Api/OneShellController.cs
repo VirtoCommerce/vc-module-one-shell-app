@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VirtoCommerce.OneShell.Core.Models;
 using VirtoCommerce.OneShell.Core.Services;
+using VirtoCommerce.Platform.Core.Security;
 using Permissions = VirtoCommerce.OneShell.Core.ModuleConstants.Security.Permissions;
 
 namespace VirtoCommerce.OneShell.Web.Controllers.Api;
@@ -29,10 +30,12 @@ public class OneShellController : Controller
     }
 
     [HttpGet]
-    [Route("recent/{take}")]
-    public async Task<ActionResult<string>> GetMainMenu([FromRoute] int take = 5)
+    [Route("recent/{cultureName}/{take}")]
+    public async Task<ActionResult<string>> GetMainMenu([FromRoute] string cultureName = null, [FromRoute] int take = 5)
     {
-        var result = await _mainMenuService.GetRecentMenuItems(take);
+        var userId = User.GetUserId();
+
+        var result = await _mainMenuService.GetRecentMenuItemsAsync(cultureName, userId, take);
 
         return Ok(result);
     }
@@ -41,9 +44,9 @@ public class OneShellController : Controller
     [Route("click-event")]
     public async Task<ActionResult<string>> RecordClickEvent([FromBody] MenuItemClickEvent clickEvent)
     {
-        clickEvent.UserId = User.Identity?.Name;
+        clickEvent.UserId = User.GetUserId();
 
-        await _mainMenuService.RecordClickEvent(clickEvent);
+        await _mainMenuService.RecordClickEventAsync(clickEvent);
 
         return Ok();
     }

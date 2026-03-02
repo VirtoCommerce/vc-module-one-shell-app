@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using VirtoCommerce.OneShell.Core;
@@ -39,12 +40,31 @@ public class MainMenuService : IMainMenuService
         return result;
     }
 
-    public async Task<IList<MenuItem>> GetRecentMenuItems(int take)
+    public async Task<IList<MenuItem>> GetRecentMenuItemsAsync(string cultureName, string userId, int take)
     {
-        return [];
+        var mainMenu = await GetMainMenuAsync(cultureName);
+
+        // recent user Ids
+        var searchCriteria = AbstractTypeFactory<MainMenuEventSearchCriteria>.TryCreateInstance();
+        searchCriteria.UserId = userId;
+        searchCriteria.EventType = ModuleConstants.MainMenuEventClickType;
+        searchCriteria.Take = take;
+
+        var searchResult = await _mainMenuEventSearchService.SearchNoCloneAsync(searchCriteria);
+
+        var recents = new List<MenuItem>();
+        foreach (var menuItem in mainMenu.Groups.SelectMany(x => x.Items))
+        {
+            if (searchResult.Results.Any(x => x.MenuItemId == menuItem.Id))
+            {
+                recents.Add(menuItem);
+            }
+        }
+
+        return recents;
     }
 
-    public async Task RecordClickEvent(MenuItemClickEvent clickEvent)
+    public async Task RecordClickEventAsync(MenuItemClickEvent clickEvent)
     {
         var eventsToSave = new List<MainMenuEvent>();
 

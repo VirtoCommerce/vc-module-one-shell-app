@@ -8,7 +8,7 @@ public interface IMainMenuService
 {
     Task<MainMenu> GetMainMenuAsync(string cultureName);
 
-    Task<IList<MenuItem>> GetRecentMenuItems(int take);
+    Task<IList<MenuItem>> GetRecentMenuItemsAsync(string cultureName, string userId, int take);
 
-    Task RecordClickEvent(MenuItemClickEvent clickEvent);
+    Task RecordClickEventAsync(MenuItemClickEvent clickEvent);
 }

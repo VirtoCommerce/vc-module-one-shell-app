@@ -119,6 +119,11 @@ jobs:
         with:
           versionSuffix: ${{ env.VERSION_SUFFIX }}
 
+      - name: Build OneShell App
+        uses: ./.github/actions/build-one-shell-app
+        with:
+          githubToken: ${{ secrets.REPO_TOKEN }}
+
       - name: SonarCloud Begin
         uses: VirtoCommerce/vc-github-actions/sonar-scanner-begin@master
         with:

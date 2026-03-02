@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
+namespace VirtoCommerce.OneShell.Core.Models;
+
 public class MainMenu
 {
     [JsonProperty("title")]

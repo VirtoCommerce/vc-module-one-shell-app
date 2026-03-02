@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -12,10 +13,16 @@ namespace VirtoCommerce.OneShell.Data.Services;
 public class MainMenuService : IMainMenuService
 {
     private readonly ISettingsManager _settingsManagers;
+    private readonly IMainMenuEventService _mainMenuEventService;
+    private readonly IMainMenuEventSearchService _mainMenuEventSearchService;
 
-    public MainMenuService(ISettingsManager settingsManager)
+    public MainMenuService(ISettingsManager settingsManager,
+        IMainMenuEventService mainMenuEventService,
+        IMainMenuEventSearchService mainMenuEventSearchService)
     {
         _settingsManagers = settingsManager;
+        _mainMenuEventService = mainMenuEventService;
+        _mainMenuEventSearchService = mainMenuEventSearchService;
     }
 
     public async Task<MainMenu> GetMainMenuAsync(string cultureName)
@@ -37,8 +44,36 @@ public class MainMenuService : IMainMenuService
         return [];
     }
 
-    public Task RecordClickEvent(MenuItemClickEvent clickEvent)
+    public async Task RecordClickEvent(MenuItemClickEvent clickEvent)
     {
-        return Task.CompletedTask;
+        var eventsToSave = new List<MainMenuEvent>();
+
+        var searchCriteria = AbstractTypeFactory<MainMenuEventSearchCriteria>.TryCreateInstance();
+
+        searchCriteria.UserId = clickEvent.UserId;
+        searchCriteria.MenuItemId = clickEvent.MenuItemId;
+        searchCriteria.EventType = ModuleConstants.MainMenuEventClickType;
+
+        var searchResult = await _mainMenuEventSearchService.SearchNoCloneAsync(searchCriteria);
+
+        if (searchResult.Results.Count > 0)
+        {
+            foreach (var events in searchResult.Results)
+            {
+                events.ModifiedDate = DateTime.UtcNow;
+                eventsToSave.Add(events);
+            }
+        }
+        else
+        {
+            var newEvent = AbstractTypeFactory<MainMenuEvent>.TryCreateInstance();
+            newEvent.UserId = clickEvent.UserId;
+            newEvent.MenuItemId = clickEvent.MenuItemId;
+            newEvent.EventType = ModuleConstants.MainMenuEventClickType;
+
+            eventsToSave.Add(newEvent);
+        }
+
+        await _mainMenuEventService.SaveChangesAsync(eventsToSave);
     }
 }

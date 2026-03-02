@@ -41,6 +41,8 @@ public class OneShellController : Controller
     [Route("click-event")]
     public async Task<ActionResult<string>> RecordClickEvent([FromBody] MenuItemClickEvent clickEvent)
     {
+        clickEvent.UserId = User.Identity?.Name;
+
         await _mainMenuService.RecordClickEvent(clickEvent);
 
         return Ok();

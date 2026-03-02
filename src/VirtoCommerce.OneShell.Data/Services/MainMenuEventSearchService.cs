@@ -25,6 +25,22 @@ public class MainMenuEventSearchService(
     protected override IQueryable<MainMenuEventEntity> BuildQuery(IRepository repository, MainMenuEventSearchCriteria criteria)
     {
         var query = ((IOneShellRepository)repository).MenuEvents;
+
+        if (!criteria.MenuItemId.IsNullOrEmpty())
+        {
+            query = query.Where(x => x.MenuItemId == criteria.MenuItemId);
+        }
+
+        if (!criteria.UserId.IsNullOrEmpty())
+        {
+            query = query.Where(x => x.UserId == criteria.UserId);
+        }
+
+        if (!criteria.EventType.IsNullOrEmpty())
+        {
+            query = query.Where(x => x.EventType == criteria.EventType);
+        }
+
         return query;
     }
 

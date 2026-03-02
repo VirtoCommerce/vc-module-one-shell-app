@@ -5,6 +5,8 @@ namespace VirtoCommerce.OneShell.Core;
 
 public static class ModuleConstants
 {
+    public const string MainMenuEventClickType = "click";
+
     public static class Security
     {
         public static class Permissions

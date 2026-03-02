@@ -1,1 +1,1 @@
-export {};
+export { useMainMenu } from "./useMainMenu";

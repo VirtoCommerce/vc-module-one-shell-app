@@ -121,7 +121,7 @@ export class OneShellClient extends AuthApiBase {
     /**
      * @return OK
      */
-    getMainMenu2(cultureName: string, take: number): Promise<string> {
+    getRecent(cultureName: string, take: number): Promise<string> {
         let url_ = this.baseUrl + "/api/one-shell/recent/{cultureName}/{take}";
         if (cultureName === undefined || cultureName === null)
             throw new globalThis.Error("The parameter 'cultureName' must be defined.");
@@ -141,11 +141,11 @@ export class OneShellClient extends AuthApiBase {
         return this.transformOptions(options_).then(transformedOptions_ => {
             return this.http.fetch(url_, transformedOptions_);
         }).then((_response: Response) => {
-            return this.processGetMainMenu2(_response);
+            return this.processGetRecent(_response);
         });
     }
 
-    protected processGetMainMenu2(response: Response): Promise<string> {
+    protected processGetRecent(response: Response): Promise<string> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -170,6 +170,49 @@ export class OneShellClient extends AuthApiBase {
             });
         }
         return Promise.resolve<string>(null as any);
+    }
+
+    /**
+     * @return OK
+     */
+    clearRecent(): Promise<void> {
+        let url_ = this.baseUrl + "/api/one-shell/clear-recent";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: RequestInit = {
+            method: "POST",
+            headers: {
+            }
+        };
+
+        return this.transformOptions(options_).then(transformedOptions_ => {
+            return this.http.fetch(url_, transformedOptions_);
+        }).then((_response: Response) => {
+            return this.processClearRecent(_response);
+        });
+    }
+
+    protected processClearRecent(response: Response): Promise<void> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            return;
+            });
+        } else if (status === 401) {
+            return response.text().then((_responseText) => {
+            return throwException("Unauthorized", status, _responseText, _headers);
+            });
+        } else if (status === 403) {
+            return response.text().then((_responseText) => {
+            return throwException("Forbidden", status, _responseText, _headers);
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<void>(null as any);
     }
 
     /**

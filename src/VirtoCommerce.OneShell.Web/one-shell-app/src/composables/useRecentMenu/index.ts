@@ -24,7 +24,7 @@ export function useRecentMenu(take = 10) {
 
   const { loading, action: loadRecentMenu } = useAsync<string>(async (cultureName = "en-US") => {
     const client = await getApiClient();
-    const result = await client.getMainMenu2(cultureName, take);
+    const result = await client.getRecent(cultureName, take);
     recentItems.value = (result as unknown as ApiMenuItem[]).map(mapMenuItem);
     isInitialized.value = true;
   });

@@ -31,7 +31,7 @@ const version = import.meta.env.PACKAGE_VERSION;
 
 const { isAuthenticated } = useUser();
 const router = useRouter();
-const { t } = useI18n()
+const { t } = useI18n();
 
 const expandedMenuItems = ref<string[]>(["activity"]);
 

@@ -13,10 +13,12 @@ namespace VirtoCommerce.OneShell.Web.Controllers.Api;
 public class OneShellController : Controller
 {
     private readonly IMainMenuService _mainMenuService;
+    private readonly IMainMenuPermissionsFilter _mainMenuPermissionsFilter;
 
-    public OneShellController(IMainMenuService mainMenuService)
+    public OneShellController(IMainMenuService mainMenuService, IMainMenuPermissionsFilter mainMenuPermissionsFilter)
     {
         _mainMenuService = mainMenuService;
+        _mainMenuPermissionsFilter = mainMenuPermissionsFilter;
     }
 
     [HttpGet]
@@ -25,6 +27,8 @@ public class OneShellController : Controller
     public async Task<ActionResult<string>> GetMainMenu([FromRoute] string cultureName = null)
     {
         var result = await _mainMenuService.GetMainMenuAsync(cultureName);
+
+        result = _mainMenuPermissionsFilter.FilterMenuByPermissions(result, User);
 
         return Ok(result);
     }
@@ -36,6 +40,8 @@ public class OneShellController : Controller
         var userId = User.GetUserId();
 
         var result = await _mainMenuService.GetRecentMenuItemsAsync(cultureName, userId, take);
+
+        result = _mainMenuPermissionsFilter.FilterItemsByPermissions(result, User);
 
         return Ok(result);
     }

@@ -27,7 +27,7 @@ public class MenuGroup
     public string Permission { get; set; }
 
     [JsonProperty("items")]
-    public List<MenuItem> Items { get; set; } = new();
+    public IList<MenuItem> Items { get; set; } = [];
 }
 
 public class MenuItem
@@ -57,7 +57,7 @@ public class MenuItem
     public AppInfo App { get; set; }
 
     [JsonProperty("children")]
-    public List<MenuItem> Children { get; set; } = new();
+    public IList<MenuItem> Children { get; set; } = [];
 }
 
 public class AppInfo

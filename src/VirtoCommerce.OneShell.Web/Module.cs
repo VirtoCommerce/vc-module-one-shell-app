@@ -52,6 +52,7 @@ public class Module : IModule, IHasConfiguration
         serviceCollection.AddTransient<IMainMenuService, MainMenuService>();
         serviceCollection.AddTransient<IMainMenuEventService, MainMenuEventService>();
         serviceCollection.AddTransient<IMainMenuEventSearchService, MainMenuEventSearchService>();
+        serviceCollection.AddTransient<IMainMenuPermissionsFilter, MainMenuPermissionsFilter>();
     }
 
     public void PostInitialize(IApplicationBuilder appBuilder)

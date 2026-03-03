@@ -20,9 +20,3 @@ runs:
       shell: bash
       working-directory: src/VirtoCommerce.OneShell.Web/one-shell-app
       run: yarn build
-
-    - name: Copy OneShell App artifacts to Content
-      shell: bash
-      run: |
-        mkdir -p ./src/VirtoCommerce.OneShell.Web/Content/one-shell-app
-        cp -R ./src/VirtoCommerce.OneShell.Web/one-shell-app/dist/. ./src/VirtoCommerce.OneShell.Web/Content/one-shell-app/

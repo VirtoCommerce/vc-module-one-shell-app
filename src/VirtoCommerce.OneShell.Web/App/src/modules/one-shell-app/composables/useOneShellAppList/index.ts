@@ -28,7 +28,7 @@ export default (options?: { pageSize?: number, sort?: string }) => {
   });
 
   // Implement your own remove function
-  const { loading: removeLoading, action: removeItems } = useAsync<{ ids: string[] }>(async (payload) => {
+  const { loading: removeLoading, action: removeItems } = useAsync<{ ids: string[] }>(async (_payload) => {
     return;
   });
 

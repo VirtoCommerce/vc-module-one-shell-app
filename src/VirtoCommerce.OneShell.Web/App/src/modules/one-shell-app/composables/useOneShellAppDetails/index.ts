@@ -7,7 +7,7 @@ export default () => {
   const { isModified, currentValue, resetModificationState } = useModificationTracker(item);
 
   // Implement your own load function
-  const { loading: itemLoading, action: getItem } = useAsync<{ id: string }>(async (payload) => {
+  const { loading: itemLoading, action: getItem } = useAsync<{ id: string }>(async (_payload) => {
     item.value = {};
 
     resetModificationState();

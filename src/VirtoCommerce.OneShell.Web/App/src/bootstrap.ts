@@ -2,8 +2,7 @@ import { addMenuItem, registerDashboardWidget } from "@vc-shell/framework";
 import { App, markRaw } from "vue";
 import Welcome from "./components/dashboard-widgets/Welcome.vue";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export function bootstrap(app: App) {
+export function bootstrap(_app: App) {
   // Add Dashboard to main menu item
   addMenuItem({
     title: "SHELL.MENU.DASHBOARD",

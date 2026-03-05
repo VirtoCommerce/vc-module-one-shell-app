@@ -1,118 +1,135 @@
 <template>
   <div class="main-menu">
     <template v-if="loading">
-      <div
+      <template
         v-for="s in 2"
         :key="s"
-        class="main-menu__section"
-        :class="{ 'main-menu__section--bordered': s > 1 }"
       >
-        <div class="main-menu__skeleton-header">
-          <VcSkeleton
-            :rows="1"
-            animated
-            class="main-menu__skeleton-header-line"
-          />
-        </div>
-        <div class="main-menu__items">
-          <div
-            v-for="i in 2"
-            :key="i"
-            class="main-menu__skeleton-item"
-          >
+        <hr
+          v-if="s > 1"
+          class="main-menu__divider"
+        />
+        <div class="main-menu__section">
+          <div class="main-menu__skeleton-header">
             <VcSkeleton
               :rows="1"
               animated
-              class="main-menu__skeleton-label"
+              class="main-menu__skeleton-header-line"
             />
           </div>
+          <div class="main-menu__items">
+            <div
+              v-for="i in 2"
+              :key="i"
+              class="main-menu__skeleton-item"
+            >
+              <VcSkeleton
+                :rows="1"
+                animated
+                class="main-menu__skeleton-label"
+              />
+            </div>
+          </div>
         </div>
-      </div>
+      </template>
     </template>
 
     <template v-else>
-      <CollapsibleRoot
+      <template
         v-for="(section, index) in menu"
         :key="section.id"
-        class="main-menu__section"
-        :class="{ 'main-menu__section--bordered': index > 0 }"
-        :open="expanded.includes(section.id)"
-        @update:open="toggleExpanded(section.id, $event)"
       >
-        <template #default="{ open }">
-          <div class="menu-item">
-            <CollapsibleTrigger class="menu-item__trigger">
-              <span>{{ section.title }}</span>
-              <!-- TODO: Change lucide icons -->
-              <VcIcon
-                class="menu-item__chevron"
-                :class="{ 'menu-item__chevron--open': open }"
-                icon="lucide-chevron-up"
-                size="m"
-              />
-            </CollapsibleTrigger>
-          </div>
-
-          <CollapsibleContent>
-            <div class="main-menu__items">
-              <template
-                v-for="item in section.items"
-                :key="item.id"
-              >
-                <CollapsibleRoot
-                  v-if="item.children?.length"
-                  :open="expanded.includes(item.id)"
-                  @update:open="toggleExpanded(item.id, $event)"
-                >
-                  <template #default="{ open: nestedOpen }">
-                    <CollapsibleTrigger class="menu-item__element">
-                      <VcIcon
-                        :icon="item.icon"
-                        size="xs"
-                      />
-                      <span class="menu-item__text">{{ item.label }}</span>
-                      <VcIcon
-                        class="menu-item__chevron"
-                        :class="{ 'menu-item__chevron--open': nestedOpen }"
-                        icon="lucide-chevron-up"
-                        size="xs"
-                      />
-                    </CollapsibleTrigger>
-                    <CollapsibleContent>
-                      <div class="menu-item__nested-items-wrapper">
-                        <button
-                          v-for="child in item.children"
-                          :key="child.id"
-                          class="menu-item__element menu-item__element--nested"
-                          @click="child.url && emit('itemClick', { id: child.id, url: child.url })"
-                        >
-                          <VcIcon
-                            :icon="child.icon"
-                            size="xs"
-                          />
-                          <span class="menu-item__text">{{ child.label }}</span>
-                        </button>
-                      </div>
-                    </CollapsibleContent>
-                  </template>
-                </CollapsibleRoot>
-
-                <button
-                  v-else
-                  class="menu-item__element"
-                  @click="item.url && emit('itemClick', { id: item.id, url: item.url })"
-                >
-                  <VcIcon
-                    :icon="item.icon"
-                    size="xs"
-                  />
-                  <span class="menu-item__text">{{ item.label }}</span>
-                </button>
-              </template>
+        <hr
+          v-if="index > 0"
+          class="main-menu__divider"
+        />
+        <CollapsibleRoot
+          class="main-menu__section"
+          :open="expanded.includes(section.id)"
+          @update:open="toggleExpanded(section.id, $event)"
+        >
+          <template #default="{ open }">
+            <div class="menu-item">
+              <CollapsibleTrigger class="menu-item__trigger">
+                <span>{{ section.title }}</span>
+                <VcIcon
+                  class="menu-item__chevron"
+                  :class="{ 'menu-item__chevron--open': open }"
+                  icon="lucide-chevron-up"
+                  size="m"
+                />
+              </CollapsibleTrigger>
             </div>
-          </CollapsibleContent>
-        </template>
-      </CollapsibleRoot>
+
+            <CollapsibleContent>
+              <div class="main-menu__items">
+                <template
+                  v-for="item in section.items"
+                  :key="item.id"
+                >
+                  <CollapsibleRoot
+                    v-if="item.children?.length"
+                    :open="expanded.includes(item.id)"
+                    @update:open="toggleExpanded(item.id, $event)"
+                  >
+                    <template #default="{ open: nestedOpen }">
+                      <CollapsibleTrigger
+                        class="menu-item__element"
+                        :class="{ 'menu-item__element--active': isParentActive(item) }"
+                      >
+                        <VcIcon
+                          :icon="item.icon"
+                          :custom-size="16"
+                          class="menu-item__icon"
+                        />
+                        <span class="menu-item__text">{{ item.label }}</span>
+                        <VcIcon
+                          class="menu-item__chevron"
+                          :class="{ 'menu-item__chevron--open': nestedOpen }"
+                          icon="lucide-chevron-up"
+                          size="xs"
+                        />
+                      </CollapsibleTrigger>
+                      <CollapsibleContent>
+                        <div class="menu-item__nested-items-wrapper">
+                          <button
+                            v-for="child in item.children"
+                            :key="child.id"
+                            class="menu-item__element menu-item__element--nested"
+                            :class="{ 'menu-item__element--active': activeItemId === child.id }"
+                            @click="child.url && emit('itemClick', { id: child.id, url: child.url })"
+                          >
+                            <VcIcon
+                              :icon="child.icon"
+                              :custom-size="12"
+                              class="menu-item__nested-icon"
+                            />
+                            <span class="menu-item__text">{{ child.label }}</span>
+                          </button>
+                        </div>
+                      </CollapsibleContent>
+                    </template>
+                  </CollapsibleRoot>
+
+                  <button
+                    v-else
+                    class="menu-item__element"
+                    :class="{ 'menu-item__element--active': activeItemId === item.id }"
+                    @click="item.url && emit('itemClick', { id: item.id, url: item.url })"
+                  >
+                    <VcIcon
+                      :icon="item.icon"
+                      :custom-size="16"
+                      class="menu-item__icon"
+                    />
+                    <span class="menu-item__text">{{ item.label }}</span>
+                  </button>
+                </template>
+              </div>
+            </CollapsibleContent>
+          </template>
+        </CollapsibleRoot>
+      </template>
     </template>
   </div>
 </template>
@@ -124,9 +141,14 @@ import type { MenuSection } from "../types";
 interface Props {
   menu: MenuSection[];
   loading?: boolean;
+  activeItemId?: string;
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
+
+function isParentActive(item: MenuSection["items"][number]): boolean {
+  return !!item.children?.some((child) => child.id === props.activeItemId);
+}
 
 const emit = defineEmits<{
   itemClick: [item: { id: string; url: string }];
@@ -147,10 +169,10 @@ function toggleExpanded(id: string, isOpen: boolean) {
 
 <style lang="scss">
 .main-menu {
-  &__section {
-    &--bordered {
-      @apply tw-border-t tw-border-[--neutrals-200] tw-pt-3 tw-mt-3;
-    }
+  @apply -tw-mr-[18px] -tw-ml-[10px];
+
+  &__divider {
+    @apply tw-border-t tw-border-neutrals-200 tw-ml-1 tw-mr-3 tw-my-2;
   }
 
   &__items {
@@ -177,23 +199,36 @@ function toggleExpanded(id: string, isOpen: boolean) {
 
   .menu-item {
     &__trigger {
-      @apply tw-pl-1 tw-py-1 tw-flex tw-justify-between tw-items-center tw-w-full tw-uppercase tw-text-[--neutrals-500] tw-text-xs tw-font-medium;
+      @apply tw-pl-2.5 tw-pr-[18px] tw-h-10 tw-flex tw-justify-between tw-items-center tw-w-full tw-uppercase tw-text-neutrals-400 tw-text-sm;
     }
 
     &__element {
-      @apply tw-p-1.5 tw-flex tw-rounded-md tw-w-full tw-text-xs tw-items-center tw-gap-1.5 tw-font-medium;
+      @apply tw-pl-2.5 tw-pr-3 tw-py-1.5 tw-flex tw-w-full tw-text-xs tw-items-center tw-gap-1.5;
 
-      &:not(&--nested) {
-        @apply tw-font-semibold;
+      &--nested {
+        @apply tw-rounded;
       }
 
-      &:hover {
-        @apply tw-bg-[--secondary-50];
+      &:not(&--nested) {
+        @apply tw-rounded-l-md;
+      }
+
+      &:hover,
+      &--active {
+        @apply tw-bg-[--secondary-100];
       }
     }
 
+    &__icon {
+      @apply tw-min-w-4 tw-min-h-4 tw-text-secondary-700;
+    }
+
+    &__nested-icon {
+      @apply tw-min-w-3 tw-min-h-3 tw-text-secondary-700;
+    }
+
     &__nested-items-wrapper {
-      @apply tw-pl-2 tw-flex tw-flex-col tw-gap-0.5;
+      @apply tw-pl-2.5 tw-pr-2 tw-py-1.5 tw-flex tw-flex-col tw-gap-0.5;
     }
 
     &__text {
@@ -201,7 +236,7 @@ function toggleExpanded(id: string, isOpen: boolean) {
     }
 
     &__chevron {
-      @apply tw-transition-transform tw-duration-200 tw-rotate-180;
+      @apply tw-transition-transform tw-duration-200 tw-rotate-180 tw-text-neutrals-400;
 
       &--open {
         @apply tw-rotate-0;

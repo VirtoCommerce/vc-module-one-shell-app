@@ -6,10 +6,14 @@
     :version="version"
   >
     <template #menu>
+      <div class="search">
+        <VcInput :placeholder="$t('SHELL.MENU.SEARCH')" />
+      </div>
       <MainMenu
         v-model:expanded="expandedMenuItems"
         :loading="isLoading"
         :menu
+        :active-item-id="activeMenuItemId"
         @item-click="onMenuItemClick"
       />
     </template>
@@ -34,6 +38,7 @@ const router = useRouter();
 const { t } = useI18n();
 
 const expandedMenuItems = ref<string[]>(["activity"]);
+const activeMenuItemId = ref<string>();
 
 const { menu: defaultMenu, loadMenu, loading: isMenuLoading, recordClick } = useMainMenu();
 const { recentItems, loadRecentMenu, loading: isRecentLoading } = useRecentMenu(5);
@@ -55,6 +60,7 @@ const isLoading = computed(() => {
 });
 
 async function onMenuItemClick({ id, url }: { id: string; url: string }) {
+  activeMenuItemId.value = id;
   router.push({ name: "Platform", query: { url } });
   await recordClick(id);
   void loadRecentMenu();
@@ -77,4 +83,8 @@ console.debug(`Initializing App`);
 
 <style lang="scss">
 @use "./../styles/index.scss";
+
+.search {
+  @apply -tw-mx-[18px] tw-px-[18px] tw-py-3 tw-bg-secondary-50 tw-border-b tw-border-neutrals-200 tw-mb-2;
+}
 </style>

@@ -3,8 +3,7 @@
   "SHELL": {
     "MENU": {
       "DASHBOARD": "Home",
-      "RECENT": "Recent",
-      "SEARCH": "Search keyword"
+      "RECENT": "Recent"
     },
     "DASHBOARD": {
       "TITLE": "Dashboard",

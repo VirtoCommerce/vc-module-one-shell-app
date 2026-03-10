@@ -2,11 +2,20 @@ import { RouteRecordRaw } from "vue-router";
 import App from "../pages/App.vue";
 import Dashboard from "../pages/Dashboard.vue";
 import Platform from "../pages/Platform.vue";
-import { Invite, Login, ResetPassword, useBladeNavigation, ChangePasswordPage } from "@vc-shell/framework";
+import {
+  Invite,
+  Login,
+  ResetPassword,
+  useBladeNavigation,
+  ChangePasswordPage,
+  ForgotPassword,
+} from "@vc-shell/framework";
 // eslint-disable-next-line import/no-unresolved
 import whiteLogoImage from "/assets/logo-white.svg";
 // eslint-disable-next-line import/no-unresolved
 import bgImage from "/assets/background.jpg";
+
+const version = import.meta.env.PACKAGE_VERSION;
 
 export const routes: RouteRecordRaw[] = [
   {
@@ -34,10 +43,23 @@ export const routes: RouteRecordRaw[] = [
     name: "Login",
     path: "/login",
     component: Login,
+    meta: {
+      appVersion: version,
+    },
     props: () => ({
       logo: whiteLogoImage,
-      background: bgImage,
-      title: "One Shell App",
+      title: "One Shell",
+    }),
+  },
+  {
+    name: "ForgotPassword",
+    path: "/forgot-password",
+    component: ForgotPassword,
+    meta: {
+      appVersion: version,
+    },
+    props: () => ({
+      logo: whiteLogoImage,
     }),
   },
   {
@@ -49,7 +71,6 @@ export const routes: RouteRecordRaw[] = [
       token: _route.query.token,
       userName: _route.query.userName,
       logo: whiteLogoImage,
-      background: bgImage,
     }),
   },
   {
@@ -61,7 +82,6 @@ export const routes: RouteRecordRaw[] = [
       token: _route.query.token,
       userName: _route.query.userName,
       logo: whiteLogoImage,
-      background: bgImage,
     }),
   },
   {
@@ -70,17 +90,6 @@ export const routes: RouteRecordRaw[] = [
     component: ChangePasswordPage,
     meta: {
       forced: true,
-    },
-    props: () => ({
-      background: bgImage,
-    }),
-  },
-  {
-    path: "/:pathMatch(.*)*",
-    component: App,
-    beforeEnter: async (_to) => {
-      const { routeResolver } = useBladeNavigation();
-      return routeResolver(_to);
     },
   },
 ];

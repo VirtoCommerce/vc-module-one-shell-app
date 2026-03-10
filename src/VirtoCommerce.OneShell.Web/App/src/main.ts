@@ -3,15 +3,12 @@ import { createApp } from "vue";
 import { router } from "./router";
 import * as locales from "./locales";
 import { RouterView } from "vue-router";
-import OneShellApp from "./modules/one-shell-app";
-import { bootstrap } from "./bootstrap";
 
 // Load required CSS
 import "@vc-shell/framework/dist/index.css";
 
 async function startApp() {
   const { loadUser } = useUser();
-
 
   try {
     await loadUser();
@@ -28,12 +25,13 @@ async function startApp() {
         locale: import.meta.env.APP_I18N_LOCALE,
         fallbackLocale: import.meta.env.APP_I18N_FALLBACK_LOCALE,
       },
+      aiAgent: {
+        config: {
+          url: import.meta.env.APP_AI_AGENT_URL,
+        },
+      },
     })
-    // OneShellApp module initialization
-    .use(OneShellApp, { router })
     .use(router);
-
-  bootstrap(app);
 
   Object.entries(locales).forEach(([key, message]) => {
     app.config.globalProperties.$mergeLocaleMessage(key, message);

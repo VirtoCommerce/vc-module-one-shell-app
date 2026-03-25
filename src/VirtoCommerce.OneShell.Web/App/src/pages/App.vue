@@ -4,11 +4,13 @@
     :logo="logoImage"
     title="One Shell"
     :version="version"
+    show-search
   >
-    <template #menu="{ expanded }">
+    <template #menu="{ expanded, searchQuery }">
       <MainMenu
-        :expanded="expanded"
+        :expanded
         :loading="isLoading"
+        :search-query
         :menu
         @item-click="onMenuItemClick"
       />

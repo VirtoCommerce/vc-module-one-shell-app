@@ -6,7 +6,7 @@
     :class="{ 'main-menu--collapsed': !expanded }"
   >
     <VcMenuGroup
-      v-for="section in menu"
+      v-for="section in filteredMenu"
       :key="section.id"
       :group-id="section.id"
       :title="section.title"
@@ -47,23 +47,56 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from "vue";
 import { VcMenu, VcMenuItem, VcMenuGroup } from "@vc-shell/framework";
-import type { MenuSection } from "../types";
+import type { MenuSection, CustomMenuItem } from "../types";
 
 interface Props {
   menu: MenuSection[];
   loading?: boolean;
   expanded?: boolean;
   activeItemId?: string;
+  searchQuery: string;
 }
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   expanded: true,
 });
 
 const emit = defineEmits<{
   itemClick: [item: { id: string; url: string }];
 }>();
+
+const filteredMenu = computed<MenuSection[]>(() => {
+  const query = props.searchQuery?.toLowerCase().trim();
+  if (!query) return props.menu;
+
+  return props.menu
+    .map((section) => {
+      const filteredItems = section.items
+        .map((item) => {
+          if (!item.children?.length) {
+            return item.label.toLowerCase().includes(query) ? item : null;
+          }
+
+          if (item.label.toLowerCase().includes(query)) return item;
+
+          const matchedChildren = item.children.filter((child) => child.label.toLowerCase().includes(query));
+
+          if (matchedChildren.length) {
+            return { ...item, children: matchedChildren } as CustomMenuItem;
+          }
+
+          return null;
+        })
+        .filter(Boolean) as CustomMenuItem[];
+
+      if (!filteredItems.length) return null;
+
+      return { ...section, items: filteredItems };
+    })
+    .filter(Boolean) as MenuSection[];
+});
 </script>
 
 <style lang="scss" scoped>

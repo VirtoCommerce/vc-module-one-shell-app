@@ -1,6 +1,10 @@
 import { ref, onUnmounted, type ShallowRef } from "vue";
-import type { IAiContextUpdatePayload, IAiChatMessagePayload, IAiAgentMessage } from "@vc-shell/framework";
-import { EMBEDDED_TO_HOST_MESSAGE_TYPES, HOST_TO_EMBEDDED_MESSAGE_TYPES, useAiAgent } from "@vc-shell/framework";
+import type { IAiContextUpdatePayload, IAiChatMessagePayload, IAiAgentMessage } from "@vc-shell/framework/ai-agent";
+import {
+  EMBEDDED_TO_HOST_MESSAGE_TYPES,
+  HOST_TO_EMBEDDED_MESSAGE_TYPES,
+  useAiAgent,
+} from "@vc-shell/framework/ai-agent";
 
 export function useEmbeddedAppBridge(iframeRef: Readonly<ShallowRef<HTMLIFrameElement | null>>) {
   const isAppReady = ref(false);

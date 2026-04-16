@@ -338,3 +338,6 @@ ASALocalRun/
 dist/
 **/Properties/launchSettings.json
 /src/VirtoCommerce.OneShell.Web/Content/one-shell-app
+
+.serena
+.DS_store

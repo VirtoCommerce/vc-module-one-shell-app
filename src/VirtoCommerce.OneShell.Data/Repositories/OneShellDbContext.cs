@@ -1,5 +1,6 @@
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
+using VirtoCommerce.OneShell.Data.Models;
 using VirtoCommerce.Platform.Data.Infrastructure;
 
 namespace VirtoCommerce.OneShell.Data.Repositories;
@@ -20,8 +21,8 @@ public class OneShellDbContext : DbContextBase
     {
         base.OnModelCreating(modelBuilder);
 
-        //modelBuilder.Entity<OneShellEntity>().ToTable("OneShell").HasKey(x => x.Id);
-        //modelBuilder.Entity<OneShellEntity>().Property(x => x.Id).HasMaxLength(IdLength).ValueGeneratedOnAdd();
+        modelBuilder.Entity<MainMenuEventEntity>().ToTable("MainMenuEvent").HasKey(x => x.Id);
+        modelBuilder.Entity<MainMenuEventEntity>().Property(x => x.Id).HasMaxLength(IdLength).ValueGeneratedOnAdd();
 
         switch (Database.ProviderName)
         {

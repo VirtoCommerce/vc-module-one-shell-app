@@ -4,13 +4,13 @@
   <version>3.1000.0</version>
   <version-tag></version-tag>
 
-  <platformVersion>3.1002.0</platformVersion>
+  <platformVersion>3.1016.0</platformVersion>
   <dependencies>
     <!--<dependency id="VirtoCommerce.Core" version="3.800.0" />-->
   </dependencies>
 
-  <title>VirtoCommerce OneShell</title>
-  <description>VirtoCommerce OneShell</description>
+  <title>One Shell</title>
+  <description>Unified Virto Commerce Admin</description>
 
   <authors>
     <author>Konstantin Savosteev</author>

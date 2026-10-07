@@ -15,6 +15,8 @@
     </PackageReference>
     
     <PackageReference Include="VirtoCommerce.Platform.Data.PostgreSql" Version="3.1002.0" />
+    <!-- Override transitive System.Security.Cryptography.Xml with a patched version (high severity DoS advisories, e.g. GHSA-37gx-xxp4-5rgx, GHSA-23rf-6693-g89p) -->
+    <PackageReference Include="System.Security.Cryptography.Xml" Version="10.0.10" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VirtoCommerce.OneShell.Data\VirtoCommerce.OneShell.Data.csproj" />
